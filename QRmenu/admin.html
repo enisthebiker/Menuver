@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRMenu - Yönetim Paneli</title>
+
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+    <h2>QRMenu Yönetim</h2>
+    <span id="businessInfo">Yönetim Paneli</span>
+    <button class="secondary" id="viewMenu"
+        onclick="window.open('index.html?isletme=' + encodeURIComponent(businessSlug), '_blank')">
+    Menüyü Görüntüle
+</button>
+    <button class="secondary" id="backToDeveloper" hidden
+        onclick="window.location.href='developer.html'">
+    Kurulum Yöneticisine Dön
+</button>
+    <button class="secondary" onclick="logout()">Çıkış Yap</button>
+</div>
+</header>
+
+<main>
+
+    <section class="panel">
+        <h3>İşletme Bilgileri</h3>
+
+        <label>İşletme adı</label>
+        <input type="text" id="restaurantName" value="Demo Cafe">
+
+        <label>Logo adresi</label>
+        <input type="text" id="restaurantLogo"
+               placeholder="https://...">
+        <label>Bilgisayardan logo seç</label>
+        <input type="file" id="restaurantLogoFile" accept="image/*">
+        <button class="primary" onclick="saveRestaurant()">
+            Kaydet
+        </button>
+        <button class="secondary" onclick="restoreDefaultLogo()">
+         Varsayılan logoya dön
+        </button>
+    </section>
+
+    <section class="panel">
+
+    <section class="panel">
+        <h3>Menü QR Kodu</h3>
+
+        <p style="font-size:13px; color:#888;">
+            Müşterileriniz bu QR kodu okutarak menünüze ulaşabilir.
+        </p>
+
+        <button class="primary" onclick="generateMenuQR()">
+            QR Kod Oluştur
+        </button>
+
+        <div id="qrCode"
+             style="margin-top:20px; display:flex; justify-content:center;">
+        </div>
+
+        <button class="secondary" id="downloadQR"
+                onclick="downloadMenuQR()" hidden>
+            QR Kodu İndir
+        </button>
+    </section>
+
+        <h3>Kategoriler</h3>
+
+        <label>Yeni kategori</label>
+        <div style="display:flex; gap:8px;">
+            <input type="text" id="newCategory"
+                   placeholder="Kategori adı">
+            <button class="primary" onclick="addCategory()">
+                Ekle
+            </button>
+        </div>
+
+        <div id="categoryList"></div>
+    </section>
+
+    <section class="panel">
+        <h3 id="formTitle">Yeni Ürün Ekle</h3>
+
+        <input type="hidden" id="editId">
+
+        <label>Ürün adı</label>
+        <input type="text" id="productName"
+               placeholder="Ürün adı">
+
+        <label>Kategori</label>
+        <select id="productCategory"></select>
+
+        <label>Fiyat (TL)</label>
+        <input type="number" id="productPrice"
+               placeholder="0" min="0" step="0.01">
+
+        <label>Açıklama</label>
+        <textarea id="productDescription"
+                  placeholder="Ürün açıklaması"></textarea>
+
+        <label>Fotoğraf adresi</label>
+        <input type="text" id="productImage"
+               placeholder="https://...">
+        <label>Bilgisayardan fotoğraf seç</label>
+<input type="file" id="productImageFile" accept="image/*">
+<button class="danger" type="button" onclick="clearProductImage()">
+    Resmi Kaldır
+</button>
+        <div class="form-actions">
+            <button class="primary" onclick="saveProduct()">
+                Bilgileri Kaydet
+            </button>
+
+            <button class="secondary" id="cancelEdit"
+                    onclick="resetForm()" hidden>
+                Vazgeç
+            </button>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h3>Menü Ürünleri</h3>
+        <div id="productList"></div>
+    </section>
+<section class="panel">
+    <h3>Şifre Değiştir</h3>
+
+    <label>Mevcut şifre</label>
+    <input type="password" id="currentPassword"
+           placeholder="Mevcut şifreniz">
+
+    <label>Yeni şifre</label>
+    <input type="password" id="newPassword"
+           placeholder="Yeni şifreniz">
+
+    <label>Yeni şifre tekrar</label>
+    <input type="password" id="confirmPassword"
+           placeholder="Yeni şifrenizi tekrar girin">
+
+    <button class="primary" onclick="changePassword()">
+        Şifremi Değiştir
+    </button>
+</section>
+    <section class="panel">
+        <h3>Hesabı Sil</h3>
+
+        <p style="font-size:13px; color:#888;">
+            İşletmenizi ve hesabınızı kalıcı olarak silebilirsiniz.
+            Bu işlem ürünleri, kategorileri ve işletme bilgilerini de siler.
+        </p>
+
+        <label>Onaylamak için mevcut şifrenizi girin</label>
+        <input
+            type="password"
+            id="deleteAccountPassword"
+            placeholder="Mevcut şifreniz"
+        >
+
+        <button class="danger" onclick="deleteAccount()">
+            Hesabımı ve İşletmemi Sil
+        </button>
+    </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>
