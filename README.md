@@ -59,5 +59,9 @@ Proje şu anda yerel geliştirme ortamında çalışacak şekilde hazırlanmış
 
 <img width="859" height="423" alt="decafe" src="https://github.com/user-attachments/assets/18877e2f-42e2-426c-a827-d02433cd0edb" />
 
+## Diagram
+
+<img width="11024" height="5141" alt="diagram" src="https://github.com/user-attachments/assets/85c1883e-a0b3-45ca-8e1d-087512e307cc" />
+
 
 
