@@ -54,5 +54,5 @@ Proje şu anda yerel geliştirme ortamında çalışacak şekilde hazırlanmış
 
 **Geliştiren:** Enis Baydemir
 ## Ekran Görüntüleri
-<img width="800" alt="Menuver" src="https://github.com/enisthebiker/Menuver/raw/main/qrmenu/images/decaf.png" />
+<img width="800" alt="Menuver" src="https://github.com/enisthebiker/Menuver/qrmenu/images/decaf.png" />
 
