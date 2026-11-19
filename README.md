@@ -4,6 +4,8 @@
 
 Menuver, birden fazla işletmenin aynı sistem üzerinden kendi dijital menülerini oluşturup yönetebildiği, PHP ve MySQL tabanlı bir web uygulamasıdır.
 
+Abonelik veya platform bağımlılığı olmadan, kendi sunucunuzda barındırabileceğiniz özgür bir dijital menü çözümü.
+
 Çoklu işletme yapısı sayesinde farklı işletmeler kendi hesaplarıyla sisteme kayıt olabilir ve menülerini bağımsız olarak yönetebilir. İsteyen işletmeler ise sistemi kendi web sunucularına kurarak yalnızca kendi işletmelerine özel, bağımsız bir dijital menü olarak kullanabilir.
 
 Müşteriler menülere QR kod veya doğrudan bağlantı üzerinden ulaşabilir. İşletme yöneticileri ürünlerini, kategorilerini, logolarını ve işletme bilgilerini yönetim panelinden kolayca düzenleyebilir. Ücretsizdir, kendi web sayfanızın sunucusunda olacağından ayrıca abonelik gerektirmez, arayüzü basit tutulmuştur. 
