@@ -53,3 +53,9 @@ Proje şu anda yerel geliştirme ortamında çalışacak şekilde hazırlanmış
 ---
 
 **Geliştiren:** Enis Baydemir
+## Ekran Görüntüleri
+
+![Ana Menü](images/decaf.png)
+
+![Yönetim Paneli](images/decafe.png)
+
