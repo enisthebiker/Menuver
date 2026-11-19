@@ -54,7 +54,7 @@ Proje şu anda yerel geliştirme ortamında çalışacak şekilde hazırlanmış
 
 **Geliştiren:** Enis Baydemir
 ## Ekran Görüntüleri
-![Ana Menü](images/decaf.png)
-![Ana Menü](images/decafe.png)
+<img src="./images/decaf.png" alt="Menuver" width="800">
+<img src="./images/decafe.png" alt="Menuver" width="800">
 
 
