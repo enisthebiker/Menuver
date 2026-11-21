@@ -1,4 +1,4 @@
-# Menuver
+# Menuver (berbat bir isim, menoverdan çağrıştı bir anda)
 
 **QR Kod Destekli Dijital Menü Yönetim Sistemi**
 
