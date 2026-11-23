@@ -140,3 +140,82 @@ async function logout() {
 
 
 loadBusinesses();
+// İşletme kayıt ayarı
+let registrationEnabled = false;
+
+async function loadRegistrationSetting() {
+    const status = document.getElementById("registrationStatus");
+    const button = document.getElementById("toggleRegistrationButton");
+
+    try {
+        const response = await fetch("api/registration-settings.php");
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error(result.message || "Ayar okunamadı.");
+        }
+
+        registrationEnabled = result.enabled;
+
+        updateRegistrationDisplay();
+
+        button.disabled = false;
+
+    } catch (error) {
+        status.textContent = "Kayıt ayarı yüklenemedi.";
+        button.textContent = "Tekrar Dene";
+        button.disabled = false;
+    }
+}
+
+function updateRegistrationDisplay() {
+    const status = document.getElementById("registrationStatus");
+    const button = document.getElementById("toggleRegistrationButton");
+
+    if (registrationEnabled) {
+        status.textContent = "İşletme kayıtları açık.";
+        button.textContent = "Kayıtları Kapat";
+    } else {
+        status.textContent = "İşletme kayıtları kapalı.";
+        button.textContent = "Kayıtları Aç";
+    }
+}
+
+async function toggleRegistration() {
+    const button = document.getElementById("toggleRegistrationButton");
+
+    button.disabled = true;
+
+    try {
+        const response = await fetch("api/registration-settings.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                enabled: !registrationEnabled
+            })
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error(result.message || "Ayar değiştirilemedi.");
+        }
+
+        registrationEnabled = result.enabled;
+
+        updateRegistrationDisplay();
+
+    } catch (error) {
+        alert("Kayıt ayarı değiştirilemedi: " + error.message);
+    }
+
+    button.disabled = false;
+}
+
+document
+    .getElementById("toggleRegistrationButton")
+    .addEventListener("click", toggleRegistration);
+
+loadRegistrationSetting();
