@@ -4,6 +4,9 @@
 
 Demo: https://menuverdemo.wuaze.com
 
+Senin Menün. Senin Web Siten. Kontrol Sende. Paran cebinde.
+Your Menu. Your Website. Your Control. Your Money Stays Yours.
+
 Menuver, birden fazla işletmenin aynı sistem üzerinden kendi dijital menülerini oluşturup yönetebildiği, PHP ve MySQL tabanlı bir web uygulamasıdır.
 
 Abonelik veya platform bağımlılığı olmadan, kendi sunucunuzda barındırabileceğiniz özgür bir dijital menü çözümü.
