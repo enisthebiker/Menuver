@@ -1,4 +1,27 @@
+// İşletme kayıt iznini kontrol et
+async function checkRegistrationPermission() {
+    const form = document.getElementById("registerForm");
+    const closedMessage = document.getElementById("registrationClosedMessage");
 
+    try {
+        const response = await fetch("api/registration-settings.php");
+        const result = await response.json();
+
+        if (response.ok && result.success && result.enabled === true) {
+            form.hidden = false;
+            closedMessage.hidden = true;
+        } else {
+            form.hidden = true;
+            closedMessage.hidden = false;
+        }
+
+    } catch (error) {
+        form.hidden = true;
+        closedMessage.hidden = false;
+    }
+}
+
+checkRegistrationPermission();
 document.getElementById("registerForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
