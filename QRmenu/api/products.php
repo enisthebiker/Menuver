@@ -13,22 +13,28 @@ $method = $_SERVER["REQUEST_METHOD"];
 // Ürünleri listele
 if ($method === "GET") {
 
-    $slug = trim($_GET["isletme"] ?? "");
+   $businessParam = trim($_GET["isletme"] ?? "");
 
-    if ($slug === "") {
-        http_response_code(400);
-        echo json_encode([
-            "success" => false,
-            "message" => "İşletme belirtilmedi."
-        ], JSON_UNESCAPED_UNICODE);
-        exit;
-    }
+if ($businessParam === "") {
+    http_response_code(400);
+    echo json_encode([
+        "success" => false,
+        "message" => "İşletme belirtilmedi."
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
+if (ctype_digit($businessParam)) {
+    $stmt = $baglanti->prepare(
+        "SELECT id FROM businesses WHERE id = ? LIMIT 1"
+    );
+    $stmt->bind_param("i", $businessParam);
+} else {
     $stmt = $baglanti->prepare(
         "SELECT id FROM businesses WHERE slug = ? LIMIT 1"
     );
-
-    $stmt->bind_param("s", $slug);
+    $stmt->bind_param("s", $businessParam);
+}
     $stmt->execute();
 
     $sonuc = $stmt->get_result();
