@@ -1,7 +1,8 @@
 # Menuver (berbat bir isim, menoverdan çağrıştı bir anda)
 
 **QR Kod Destekli Dijital Menü Yönetim Sistemi**
-https://menuverdemo.wuaze.com
+
+Demo: https://menuverdemo.wuaze.com
 
 Menuver, birden fazla işletmenin aynı sistem üzerinden kendi dijital menülerini oluşturup yönetebildiği, PHP ve MySQL tabanlı bir web uygulamasıdır.
 
