@@ -14,6 +14,34 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
 }
 
+// İşletme kayıt iznini kontrol et
+$settingsFile = __DIR__ . "/data/registration-settings.json";
+
+$registrationEnabled = false;
+
+if (is_file($settingsFile) && is_readable($settingsFile)) {
+    $settings = json_decode(file_get_contents($settingsFile), true);
+
+    if (
+        is_array($settings) &&
+        isset($settings["registration_enabled"]) &&
+        $settings["registration_enabled"] === true
+    ) {
+        $registrationEnabled = true;
+    }
+}
+
+if (!$registrationEnabled) {
+    http_response_code(403);
+
+    echo json_encode([
+        "success" => false,
+        "message" => "Yeni işletme kayıtları şu anda kapalı."
+    ], JSON_UNESCAPED_UNICODE);
+
+    exit;
+}
+
 $veri = json_decode(file_get_contents("php://input"), true);
 
 if (!is_array($veri)) {
