@@ -1,6 +1,7 @@
 
         // Yönetim panelinde kullanılan varsayılan veriler
-const businessSlug = new URLSearchParams(window.location.search).get("isletme");
+const businessSlug = new URLSearchParams(window.location.search).get("isletme")
+    || new URLSearchParams(window.location.search).get("i");
         const defaultCategories = [
             "Kahvaltı",
             "Ana Yemekler",
