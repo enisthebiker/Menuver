@@ -43,3 +43,21 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     button.disabled = false;
     button.textContent = "Giriş Yap";
 });
+// İşletme kayıt bağlantısının görünürlüğü
+async function loadRegistrationVisibility() {
+    const registrationLink = document.getElementById("registrationLink");
+
+    try {
+        const response = await fetch("api/registration-settings.php");
+        const result = await response.json();
+
+        if (!response.ok || !result.success || result.enabled !== true) {
+            registrationLink.hidden = true;
+        }
+
+    } catch (error) {
+        registrationLink.hidden = true;
+    }
+}
+
+loadRegistrationVisibility();
