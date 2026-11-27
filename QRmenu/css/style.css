@@ -77,6 +77,19 @@
             padding: 20px 15px;
         }
 
+.category-heading {
+    font-size: 19px;
+    font-weight: bold;
+    color: #315b46;
+    margin: 28px 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e3e8e3;
+}
+
+.category-heading:first-child {
+    margin-top: 0;
+}
+
         .product {
             display: flex;
             gap: 15px;
