@@ -2,6 +2,7 @@
         // Yönetim panelinde kullanılan varsayılan veriler
 const businessSlug = new URLSearchParams(window.location.search).get("isletme")
     || new URLSearchParams(window.location.search).get("i");
+             
         const defaultCategories = [
             "Kahvaltı",
             "Ana Yemekler",
@@ -126,67 +127,109 @@ document.title = name;
 
         // Ürünleri oluştur
 
-        function renderProducts() {
-            const list = document.getElementById("productList");
-            list.innerHTML = "";
+        // Ürünleri oluştur
 
-            const activeProducts = products.filter(product =>
-                product.active !== false &&
-                (selectedCategory === "all" ||
-                 product.category === selectedCategory)
+function renderProducts() {
+    const list = document.getElementById("productList");
+    list.innerHTML = "";
+
+    const activeProducts = products.filter(product =>
+        product.active !== false &&
+        (selectedCategory === "all" ||
+         product.category === selectedCategory)
+    );
+
+    if (activeProducts.length === 0) {
+        list.innerHTML =
+            '<div class="empty">Bu kategoride henüz ürün bulunmuyor.</div>';
+        return;
+    }
+
+    // Tümü seçiliyse ürünleri kategori başlıkları altında göster
+    if (selectedCategory === "all") {
+
+        categories.forEach(category => {
+            const categoryProducts = activeProducts.filter(
+                product => product.category === category
             );
 
-            if (activeProducts.length === 0) {
-                list.innerHTML =
-                    '<div class="empty">Bu kategoride henüz ürün bulunmuyor.</div>';
-                return;
-            }
+            // Kategoride ürün yoksa başlık da gösterme
+            if (categoryProducts.length === 0) return;
 
-            activeProducts.forEach(product => {
-                const card = document.createElement("section");
-                card.className = "product";
+            const heading = document.createElement("h2");
+            heading.className = "category-heading";
+            heading.textContent = category;
+            list.appendChild(heading);
 
-                const imageArea = document.createElement("div");
-imageArea.className = "product-image";
+            categoryProducts.forEach(product => {
+                createProductCard(product, list);
+            });
+        });
 
-if (product.image) {
-    const image = document.createElement("img");
+        // Herhangi bir kategoriye bağlı olmayan ürünleri de göster
+        const uncategorizedProducts = activeProducts.filter(
+            product => !categories.includes(product.category)
+        );
 
-    image.src = product.image;
-    image.alt = product.name;
+        uncategorizedProducts.forEach(product => {
+            createProductCard(product, list);
+        });
 
-    image.onerror = () => {
-        image.remove();
-        imageArea.textContent = "Resim Yok";
-    };
+        return;
+    }
 
-    imageArea.appendChild(image);
-} else {
-    imageArea.textContent = "Resim Yok";
+    // Belirli bir kategori seçiliyse eski davranış devam eder
+    activeProducts.forEach(product => {
+        createProductCard(product, list);
+    });
 }
 
-card.appendChild(imageArea);
 
-                const info = document.createElement("div");
-                info.className = "product-info";
+// Ürün kartını oluştur
+function createProductCard(product, list) {
+    const card = document.createElement("section");
+    card.className = "product";
 
-                const name = document.createElement("h3");
-                name.textContent = product.name;
+    const imageArea = document.createElement("div");
+    imageArea.className = "product-image";
 
-                const description = document.createElement("p");
-                description.textContent = product.description || "";
+    if (product.image) {
+        const image = document.createElement("img");
 
-                const price = document.createElement("div");
-                price.className = "price";
-                price.textContent =
-                    Number(product.price).toLocaleString("tr-TR") + " TL";
+        image.src = product.image;
+        image.alt = product.name;
 
-                info.append(name, description, price);
-                card.appendChild(info);
+        image.onerror = () => {
+            image.remove();
+            imageArea.textContent = "Resim Yok";
+        };
 
-                list.appendChild(card);
-            });
-        }
+        imageArea.appendChild(image);
+    } else {
+        imageArea.textContent = "Resim Yok";
+    }
+
+    card.appendChild(imageArea);
+
+    const info = document.createElement("div");
+    info.className = "product-info";
+
+    const name = document.createElement("h3");
+    name.textContent = product.name;
+
+    const description = document.createElement("p");
+    description.textContent = product.description || "";
+
+    const price = document.createElement("div");
+    price.className = "price";
+    price.textContent =
+        Number(product.price).toLocaleString("tr-TR") + " TL";
+
+    info.append(name, description, price);
+    card.appendChild(info);
+
+    list.appendChild(card);
+}
 
         // Kategori filtresi
 
@@ -204,8 +247,9 @@ card.appendChild(imageArea);
      async function loadCategoriesFromDatabase() {
     try {
         const response = await fetch(
-    "api/categories.php?isletme=" + encodeURIComponent(businessSlug)
-);
+            "api/categories.php?isletme=" + encodeURIComponent(businessSlug)
+        );
+
         const data = await response.json();
 
         if (!data.success) {
@@ -213,7 +257,9 @@ card.appendChild(imageArea);
         }
 
         categories = data.categories;
+
         renderCategories();
+        renderProducts();
 
     } catch (error) {
         console.error("Kategori yükleme hatası:", error);
