@@ -2,7 +2,7 @@
 
 **QR Kod Destekli Dijital Menü Yönetim Sistemi**
 
-Demo: https://menuverdemo.wuaze.com
+Demo: https://menuverdemo.wuaze.com/welcome.html
 
 Senin Menün. Senin Web Siten. Kontrol Sende. Paran cebinde.
 
